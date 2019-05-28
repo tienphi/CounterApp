@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, SafeAreaView } from 'react-native'
 import { Styles } from './assets/styles'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { counterApp } from './src/state/rootReducer'
 import { Provider } from 'react-redux'
 import { ShowNumber, SyncButton } from './src/common/containers';
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './src/state/rootSaga';
+import AsyncButton from './src/common/containers/AsyncButton';
 
-const store = createStore(counterApp)
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(counterApp, applyMiddleware(sagaMiddleware))
+sagaMiddleware.run(rootSaga)
 
 export default class App extends Component {
   render() {
@@ -23,6 +28,10 @@ export default class App extends Component {
             <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
               <SyncButton isButtonAdd={true} />
               <SyncButton isButtonAdd={false} />
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginVertical: 20 }}>
+              <AsyncButton isButtonAdd={true} />
+              <AsyncButton isButtonAdd={false} />
             </View>
           </View>
         </SafeAreaView>
