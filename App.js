@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, SafeAreaView } from 'react-native'
 import { Styles } from './assets/styles'
-import { MyNumber, MyButton } from './src/common/components';
 import { createStore } from 'redux'
 import { counterApp } from './src/state/rootReducer'
 import { Provider } from 'react-redux'
