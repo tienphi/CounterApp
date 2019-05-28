@@ -1,14 +1,8 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { connect } from 'react-redux'
+import { MyNumber } from '../components';
 
-export default class ShowNumber extends Component {
-    render() {
-        return (
-            <View>
-                <Text> textInComponent </Text>
-            </View>
-        )
-    }
-}
+const mapStateToProps = (state) => ({
+    number: state.number
+})
 
-const styles = StyleSheet.create({})
+export default connect(mapStateToProps)(MyNumber)
